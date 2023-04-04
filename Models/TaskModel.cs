@@ -5,6 +5,7 @@ namespace TaskManager.Models
 {
     public class TaskModel
     {
+        [Key]
         public int TaskId { get; set; }
         [DisplayName("Name")]
         public string Name { get; set; }

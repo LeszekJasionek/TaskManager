@@ -12,7 +12,7 @@ namespace TaskManager.Repositories
         }
 
         public TaskModel Get(int taskId)
-            => _context.Tasks.SingleOrDefault(x => taskId == taskId);
+            => _context.Tasks.SingleOrDefault(x => x.TaskId == taskId);
 
         public IQueryable<TaskModel> GetAllActive()
             => _context.Tasks.Where(x => !x.Done);

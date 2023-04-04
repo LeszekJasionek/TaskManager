@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using TaskManager.Models;
+using TaskManager.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,7 @@ builder.Services.AddDbContext<TaskManagerContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("TaskManagerDatabase"));
 });
 
+builder.Services.AddTransient<ITaskRepository, TaskRepository>();
 
 var app = builder.Build();
 

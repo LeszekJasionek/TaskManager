@@ -4,6 +4,12 @@ namespace TaskManager.Repositories
 {
     public class TaskRepository : ITaskRepository
     {
+        private readonly TaskManagerContext _context;
+        public TaskRepository(TaskManagerContext context)
+        {
+            _context = context; 
+        }
+
         public TaskModel Get(int taskId)
         {
             throw new NotImplementedException();

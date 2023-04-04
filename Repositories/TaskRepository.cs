@@ -1,4 +1,5 @@
-﻿using TaskManager.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using TaskManager.Models;
 
 namespace TaskManager.Repositories
 {
@@ -11,27 +12,37 @@ namespace TaskManager.Repositories
         }
 
         public TaskModel Get(int taskId)
-        {
-            throw new NotImplementedException();
-        }
+            => _context.Tasks.SingleOrDefault(x => taskId == taskId);
 
         public IQueryable<TaskModel> GetAllActive()
-        {
-            throw new NotImplementedException();
-        }
+            => _context.Tasks.Where(x => !x.Done);
         public void Add(TaskModel task)
         {
-            throw new NotImplementedException();
+            _context.Tasks.Add(task);
+            _context.SaveChanges();
         }
 
         public void Update(int taskId, TaskModel task)
         {
-            throw new NotImplementedException();
+            var result = _context.Tasks.SingleOrDefault(x => x.TaskId == taskId);
+            if(result != null)
+            {
+                result.Name = task.Name;
+                result.Description = task.Description;
+                result.Done = task.Done;
+
+                _context.SaveChanges();
+            }
         }
 
         public void Delete(int taskId)
         {
-            throw new NotImplementedException();
+            var result = _context.Tasks.SingleOrDefault(x => x.TaskId == taskId);
+            if (result != null)
+            {
+                _context.Tasks.Remove(result);
+                _context.SaveChanges();
+            }
         }  
 
 
